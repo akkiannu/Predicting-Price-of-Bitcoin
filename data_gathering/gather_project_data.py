@@ -8,12 +8,11 @@ import random
 import time
 from bs4 import BeautifulSoup
 normal_delay = random.uniform(0.5, 1.5)
-from config import *
 import pymongo
 import bs4
 import pandas as pd
-client = pymongo.MongoClient(MONGO_URL)
-db = client[MONGO_DB]
+client = pymongo.MongoClient('localhost')
+db = client['BTC']
 #for stable concern, this scrape only scraper 2 days then close drive scrpe another two days
 #cmd for get data from mongodb data base:
 #cd C:\Program Files\MongoDB\Server\3.6\bin
@@ -62,7 +61,7 @@ def scrape_twitter(start, end, word):
             temp_twitter_dict['retweet'] = retweet_num
             temp_twitter_dict['favorite'] = favorite_num
             twitter_list.append(temp_twitter_dict)
-            db[MONGO_TABLE].insert(temp_twitter_dict)
+            db['twitters'].insert(temp_twitter_dict)
         except AttributeError:
             pass
     browser.close()
@@ -96,13 +95,13 @@ def gather_price(coinmarketurl):
     driver.close()
 
 def main():
-    year = 2017
-    month = 2
+    year = 2015
+    month = 1
     day = 1
-    days = 364
+    days = 732
     date_range = gen_daterange(year, month, day, days)
-    word = 'XVG'
-    gather_price('https://coinmarketcap.com/currencies/verge/')
+    word = 'BTC'
+    gather_price('https://coinmarketcap.com/currencies/bitcoin/')
     for date in date_range:
         start = str(date)
         end = str(date + timedelta(1))
