@@ -6,7 +6,8 @@ import numpy as np
 
 #instantiates a client
 client = language.LanguageServiceClient()
-data = pd.read_json('new_cleaned.json', lines=True)
+#data = pd.read_json('new_cleaned.json', lines=True)
+data = pd.read_json('bit_cleaned.json', lines=True)
 data['polarity'] = np.zeros(len(data))
 
 data['score'] = np.zeros(len(data))
@@ -34,7 +35,7 @@ def main():
         except:
             data.loc[i,'score'] = None
             data.loc[i,'magnitude'] = None
-    with open('twitter_labeled_v2.json', 'w') as f:
+    with open('twitter_labeled_bit.json', 'w') as f:
         f.write(data.to_json(orient='records', lines=True))
     return 0
 
