@@ -17,7 +17,7 @@ db = client['BTC']
 #cmd for get data from mongodb data base:
 #cd C:\Program Files\MongoDB\Server\3.6\bin
 #mongoexport --db dbname --collection collectionname --out traffic.json
-#mongoexport --db XVG --collection twitters --out datagathered.json
+    #mongoexport --db XVG --collection twitters --out datagathered.json
 from datetime import datetime, timedelta, date
 
 def gen_daterange(year, month, day, days):
@@ -98,7 +98,7 @@ def main():
     year = 2015
     month = 1
     day = 1
-    days = 732
+    days = 1100
     date_range = gen_daterange(year, month, day, days)
     word = 'BTC'
     gather_price('https://coinmarketcap.com/currencies/bitcoin/')
